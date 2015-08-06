@@ -41,6 +41,7 @@ angular.module('slick', [])
       slidesToScroll: "@"
       speed: "@"
       swipe: "@"
+      slidesGutter: '@'
       swipeToSlide: "@"
       touchMove: "@"
       touchThreshold: "@"
@@ -95,6 +96,7 @@ angular.module('slick', [])
             responsive: scope.responsive or undefined
             rtl: scope.rtl is "true"
             slide: scope.slide or "div"
+            slidesGutter: if scope.slidesGutter? then parseInt(scope.slidesGutter, 10) else 0
             slidesToShow: if scope.slidesToShow? then parseInt(scope.slidesToShow, 10) else 1
             slidesToScroll: if scope.slidesToScroll? then parseInt(scope.slidesToScroll, 10) else 1
             speed: if scope.speed? then parseInt(scope.speed, 10) else 300
