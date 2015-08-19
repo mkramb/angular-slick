@@ -147,13 +147,23 @@ angular.module('slick', []).directive('slick', [
         if (scope.initOnload) {
           isInitialized = false;
           return scope.$watch('data', function (newVal, oldVal) {
-            if (newVal != null) {
-              if (isInitialized) {
-                destroySlick();
-              }
-              initializeSlick();
-              return isInitialized = true;
+            var error, slick;
+            if (newVal === null) {
+              return false;
             }
+            if (isInitialized) {
+              slick = $(element);
+              try {
+                slick.slickRemove();
+              } catch (_error) {
+                error = _error;
+              }
+              slick.removeClass('slick-initialized slick-slider');
+              slick.find('.slick-list').remove();
+              slick.slick('unslick');
+            }
+            initializeSlick();
+            return isInitialized = true;
           });
         } else {
           return initializeSlick();
